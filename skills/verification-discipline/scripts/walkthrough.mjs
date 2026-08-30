@@ -24,13 +24,29 @@
  * record you just created, and give that query a positive control. Rule 1 is not
  * satisfied by a green page alone.
  */
-import { chromium } from 'playwright'
 import path from 'node:path'
 
+const USAGE = `usage: node walkthrough.mjs <url> [outDir]
+
+Environment:
+  FILLS='[["input[name=email]","test@example.com"]]'   selectors and values, JSON (required)
+  SUBMIT='button[type=submit]'                          submit selector
+  SUCCESS_TEXT='thank you'  FAILURE_TEXT='error'
+
+Requires: npm i playwright && npx playwright install chromium`
+
 const TARGET = process.argv[2]
-if (!TARGET) {
-  console.error('usage: node walkthrough.mjs <url> [outDir]')
-  process.exit(64)
+if (!TARGET || TARGET === '--help' || TARGET === '-h') {
+  console.error(USAGE)
+  process.exit(TARGET ? 0 : 64)
+}
+
+let chromium
+try {
+  ;({ chromium } = await import('playwright'))
+} catch {
+  console.error('playwright is not installed here. Run: npm i playwright && npx playwright install chromium')
+  process.exit(69)
 }
 const OUT = process.argv[3] || './walkthrough-shots'
 
