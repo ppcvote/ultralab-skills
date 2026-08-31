@@ -174,4 +174,4 @@ Two limits worth knowing before you wire these in:
 
 ---
 
-Distilled from production incidents at [Ultra Lab](https://ultralab.tw). The long-form version, with full incident write-ups and the structural-enforcement patterns for multi-turn agent work, is at <https://ultralab.tw/handbook>.
+Distilled from production incidents at [Ultra Lab](https://ultralab.tw). The long-form version, with full incident write-ups and the structural-enforcement patterns for multi-turn agent work, is at <https://ultralab.tw/en/handbook>.

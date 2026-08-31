@@ -21,6 +21,16 @@ npx skills add ppcvote/ultralab-skills --skill verification-discipline
 | Skill | 防的是什麼 | 觸發時機 |
 |-------|-----------|---------|
 | **verification-discipline** | agent 回報成功、每個檢查都綠燈，而實際上什麼都沒發生 | 「做完了嗎」、驗收、「測試過了但是」、排程沒產出、上線前 |
+| **structural-enforcement** | 模型老是做到一半收工；「一定要做 X」的提示失效；強制續跑失控或逼出幻覺 | 「它又停在中間」、「叫它一定要」、Stop hook、安全閥 |
+
+## structural-enforcement
+
+要模型「一定做完某事」，提示保證不了。禁止是單輪決策，義務跨越多輪，任何一輪決定「先回報進度」鏈就斷了。這個 skill 帶的是撐得住的結構做法：
+
+- 禁止與義務的分界，附「提示改三次無效、結構一次就對」的生產實證
+- 強制續跑的四道安全閥，以及少一道會壞在哪
+- 遞迴陷阱：修正機制的前提不能用模型的自述當判準
+- Claude Code 對應：實測過的 Stop hook（`must-finish-guard.py`），只用有文件的原語，不確定一律放行
 
 ## verification-discipline
 

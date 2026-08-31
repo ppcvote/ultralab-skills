@@ -21,6 +21,16 @@ npx skills add ppcvote/ultralab-skills --skill verification-discipline
 | Skill | What it prevents | Triggers |
 |-------|------------------|----------|
 | **verification-discipline** | An agent reports success, every check is green, and nothing actually happened | `is this done`, `verify`, `the test passes but`, `nothing happened`, `silently failing`, `before I ship`, `positive control` |
+| **structural-enforcement** | The model keeps stopping midway; "always do X" prompts fail; forced continuation runs away or hallucinates | `it keeps stopping`, `make it always`, `it announced instead of doing`, `stop hook`, `force it to finish`, `safety valves` |
+
+## structural-enforcement
+
+When you need the agent to ALWAYS FINISH something, a prompt cannot guarantee it. A prohibition is a one-turn decision; an obligation spans turns, and any turn that decides to "report progress first" breaks the chain. This skill carries the structural patterns that hold:
+
+- The prohibition/obligation boundary, with the production case where three prompt rewrites failed and one structural fix worked
+- Four safety valves for forced continuation (force once, reserve a wrap-up round, check the precondition, return through normal metering), and what breaks when you skip one
+- The recursion trap: never gate the correction mechanism on the model's own claim
+- The Claude Code mapping: a tested Stop hook (`must-finish-guard.py`), documented primitives only, fail-open by design
 
 ## verification-discipline
 
